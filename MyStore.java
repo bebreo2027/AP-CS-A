@@ -27,9 +27,7 @@ public class MyStore {
                 +           "Hat\n"
                 +           "Shorts\n"
                 +           "Blouse");
-        while ((myItem.repeater = true) && (myItem.totalPrice < MAX_BUDGET)){
-            myItem.addItem(scan.nextLine());
-        }
+        System.out.println(myItem.addItem(scan.nextLine()));
     }
 }
 
@@ -41,7 +39,9 @@ class Item {
     //make a variable for the total price
     private double totalPrice;
     //make a boolean variable that stops the driver's loop if any non-acceptable item is inputted
-    boolean repeater = true;
+    private boolean repeater = true;
+    //make a string that is a collective of looped toString 's
+    private String loopedToString;
     //make getters and setters for strName and dblPrice
     public void setStrName (String inStrName) {
             strName = inStrName;
@@ -56,8 +56,9 @@ class Item {
             return dblPrice;
     } 
     //make a method that takes in user input and adds to the price
-   public void addItem(String inItem){
+   public String addItem(){
        setStrName(inItem);
+        while (repeater == true) {
             //if user input is not an acceptable item, set repeater to false. if not, add prices accordingly
             if (strName.equalsIgnoreCase("t-shirt")) {
                 dblPrice = 29.99;
@@ -84,8 +85,10 @@ class Item {
                repeater = false;
             }
             if (repeater = true) {
-                toString();
+                loopedToString = (loopedToString + "\n" + toString());
             }
+        }
+       return loopedToString;
    }
 
     //use toString to print out the name and price
