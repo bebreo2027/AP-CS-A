@@ -18,16 +18,24 @@ public class MyStore {
         final double MAX_BUDGET = 250.0;
         //Make an object from the Item class
         Item myItem = new Item();
-        //print instructions
-        System.out.println("Enter items. Acceptable items are:\n"
-                +           "T-Shirt\n"
-                +           "Shoes\n"
-                +           "Jeans\n"
-                +           "Jacket\n"
-                +           "Hat\n"
-                +           "Shorts\n"
-                +           "Blouse");
-        System.out.println(myItem.addItem(scan.nextLine()));
+        //make a loop to print instructions, recieve input, and run addItem
+        while (myItem.getRepeater() == true){
+            System.out.println("""
+                               Enter items. Acceptable items are:
+                               T-Shirt
+                               Shoes
+                               Jeans
+                               Jacket
+                               Hat
+                               Shorts
+                               Blouse""");
+            myItem.setStrName(scan.nextLine());
+            System.out.println(myItem.addItem());
+            if (myItem.getTotalPrice() > MAX_BUDGET) {
+                myItem.setRepeater(false);
+                System.out.println("You've gone over budget!");
+            }
+        }
     }
 }
 
@@ -40,9 +48,9 @@ class Item {
     private double totalPrice;
     //make a boolean variable that stops the driver's loop if any non-acceptable item is inputted
     private boolean repeater = true;
-    //make a string that is a collective of looped toString 's
-    private String loopedToString;
-    //make getters and setters for strName and dblPrice
+    //make a variable counting the number of items
+    private int itemCount;
+    //make getters and setters for strName, dblPrice, repeater, and totalPrice
     public void setStrName (String inStrName) {
             strName = inStrName;
     }
@@ -55,46 +63,59 @@ class Item {
     public double getDblPrice () {
             return dblPrice;
     } 
+    public void setTotalPrice (double inTotalPrice) {
+            totalPrice = totalPrice;
+    }
+    public double getTotalPrice () {
+            return totalPrice;
+    } 
+    public void setRepeater (boolean inRepeater) {
+            repeater = inRepeater;
+    }
+    public boolean getRepeater () {
+            return repeater;
+    } 
     //make a method that takes in user input and adds to the price
    public String addItem(){
-       setStrName(inItem);
-        while (repeater == true) {
             //if user input is not an acceptable item, set repeater to false. if not, add prices accordingly
             if (strName.equalsIgnoreCase("t-shirt")) {
                 dblPrice = 29.99;
-                totalPrice += dblPrice;
+                
             } else if (strName.equalsIgnoreCase("shoes")) {
                 dblPrice = 125.99;
-                totalPrice += dblPrice;
+
             } else if (strName.equalsIgnoreCase("jeans")) {
                  dblPrice = 60.99;
-                 totalPrice += dblPrice;
+
             } else if (strName.equalsIgnoreCase("jacket")) {   
                 dblPrice = 250.0;
-                totalPrice += dblPrice;
+
             } else if (strName.equalsIgnoreCase("hat")) { 
                 dblPrice = 25.99;
-                totalPrice += dblPrice;
+
             } else if (strName.equalsIgnoreCase("shorts")) {
                 dblPrice = 75.99;
-                totalPrice += dblPrice;
+
             } else if (strName.equalsIgnoreCase("blouse")) {
                 dblPrice = 88.99;
-                totalPrice += dblPrice;
+
             } else {
                repeater = false;
+               return "Unacceptable input";
             }
-            if (repeater = true) {
-                loopedToString = (loopedToString + "\n" + toString());
-            }
-        }
-       return loopedToString;
+                totalPrice += dblPrice;
+                itemCount++;
+                return toString();
+           
    }
 
     //use toString to print out the name and price
         public String toString(){
         String result = "";
-        result = "Item: " + strName + "\n" + "Price: " + dblPrice;
+        result = "Item: " + strName + "\n"
+               + "Price: " + dblPrice + "\n"
+               + "Total price of purchases: " + totalPrice + "\n"
+                +"Number of items bought: " + itemCount + "\n";
         return result;
     }
 }
