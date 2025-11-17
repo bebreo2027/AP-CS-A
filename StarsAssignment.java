@@ -34,7 +34,7 @@ public class StarsAssignment {
                 System.out.print(" ");
             }
             //then print out the left over amount of stars to complete row length
-            for (int star = 1; star <= (MAX_ROWS - row); star++) {
+            for (int star = 0; star <= (MAX_ROWS - row); star++) {
                 System.out.print("*");    
             }
             //newline for a new row
