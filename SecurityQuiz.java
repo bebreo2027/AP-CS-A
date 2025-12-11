@@ -3,6 +3,7 @@
  */
 
 package com.mycompany.securityquiz;
+
 //import scanner
 import java.util.Scanner;
 //import random class
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author bebreo2027
+ * @author student
  */
 public class SecurityQuiz {
 
@@ -29,22 +30,15 @@ public class SecurityQuiz {
         ArrayList<String> questions = new ArrayList<String>();
         //Make an arrayList with the answers
         ArrayList<String> answers = new ArrayList<String>();
-        //Make an arrayList with the missed questions
-        ArrayList<String> missQuestions = new ArrayList<String>();
-        //Make an arrayList with the missed answers
-        ArrayList<String> missAnswers = new ArrayList<String>();
         //make an object from the Questions class
         questionAnswer q = new questionAnswer();
         //boolean that determines whether or not to loop
         boolean whetherLoop = true;
-        //determines whether or not to review
-        boolean whetherReview = false;
         //int that corresponds to number of attempts
         int attemptNumber = 1;
         do {
         //make variable storing the score
         int score = 0;
-        if (!whetherReview) {
             //Manually add the questions and answers
             questions.add("\nVPNs:\n" +
                           "a. Are only used by criminals, and you are a criminal if you use one\n" +
@@ -108,7 +102,6 @@ public class SecurityQuiz {
                     +          "design it to address common misunderstandings\n"
                     +          "and less covered concepts.\n"
                     +          "Answer \"a\", \"b\", \"c\", or \"d\"!");
-        }
             //make a for loop that loops as much as there are questions, and organizes the questions randomly
             for (int i = 0; i < 9; i++) {
                 //Prints number of current question
@@ -121,9 +114,6 @@ public class SecurityQuiz {
                 System.out.println(q.evalAnswer(inputtedAnswer));
                 if (q.getAddScore() == true) {
                     score++;
-                } else {
-                    missQuestions.add(questions.get(randVar));
-                    missAnswers.add(answers.get(randVar));
                 }
                 questions.remove(randVar);
                 answers.remove(randVar);
@@ -133,18 +123,8 @@ public class SecurityQuiz {
             System.out.println("\nYour score: " + score + " out of " + 9 + "\n"
                     +          "Number of attempts: " + attemptNumber);
             //Allows you to play again if you type y
-            System.out.println("Want to try the quiz again? Type y\n"
-                    +          "\n Want to review your missed questions? Type z");
-            if (scan.nextLine().equalsIgnoreCase("y")) {
-                    whetherLoop = true;
-                    whetherReview = false; 
-            } else if (scan.nextLine().equalsIgnoreCase("z") && score != 8) {
-                whetherLoop = true;
-                whetherReview = true; 
-            } else {
-                whetherLoop = false;
-                whetherReview = false; 
-            }
+            System.out.println("Want to try the quiz again? Type y");
+            whetherLoop = scan.nextLine().equalsIgnoreCase("y");
             attemptNumber++;
         }
         while (whetherLoop);
