@@ -4,6 +4,7 @@
 
 package com.mycompany.studentmain;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -13,10 +14,28 @@ import java.util.ArrayList;
 public class StudentMain{
     public static void main(String args[]){
         ArrayList<Student> students = new ArrayList<Student>();
+        Scanner s = new Scanner(System.in);
         students.add(new Student("Bob", "Smith", 85, 90, 95));
         students.add(new Student("Yap", "Yoyopipi", 87, 93, 90));
         students.add(new Student("Sus", "SkBiddi", 90, 95, 100));
-        System.out.println(students);
+        boolean willLoop = true;
+        while (willLoop) {            
+          System.out.println(students + "\nWant to add more students? Type y");
+          if (s.nextLine().equalsIgnoreCase("y")) {
+              System.out.println("Type the first name of the student in one line, the last name in the next line\n"
+                      + "and then the grades of the student in the three lines afterwards");
+              String inName = s.nextLine();
+              String inLastName = s.nextLine();
+              String firstGrade = s.nextLine();
+              String secondGrade = s.nextLine();
+              String thirdGrade = s.nextLine();
+              students.add(new Student(inName, inLastName, Integer.parseInt(firstGrade), Integer.parseInt(secondGrade), Integer.parseInt(thirdGrade)));
+          } else {
+            willLoop = false;
+          }
+        }
+        
+        
     }
 }
 //basic class Student - should have 3 courses
