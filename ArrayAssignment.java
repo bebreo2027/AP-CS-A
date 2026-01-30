@@ -57,7 +57,7 @@ public class ArrayAssignment {
         return inArray;
     }
     private static String printArray (String[] inArray){
-        //make the String that will store the array items, comma separated
+        //make the String that will store the array items, row separated
         //It has the first item in the list
         String returnString = "\n" + inArray[0];
         //go through array
