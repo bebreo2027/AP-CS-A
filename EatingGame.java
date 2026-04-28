@@ -23,11 +23,12 @@ public class EatingGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("This is the eating game! You are what you eat!");
+        System.out.println("This is the Eating Game! You are what you eat!");
         // Create a File object representing the file
-        File file = new File("Students/Students.txt");
+        File file = new File("Food/Food.txt");
         Scanner read;
         int intLine = 0;
+        
         try (Scanner scanner = new Scanner(file)){
             while (scanner.hasNextLine()) {
                     
@@ -38,14 +39,9 @@ public class EatingGame {
                     read.useDelimiter(",");
                     if(intLine >= 0){
                         //read the words in the correct order into the correct variables
-                        String name = read.next();
-                        int conv = read.nextInt();
-                        int stren = read.nextInt();
-                        String mssg = read.next();
                         
-                        //print the object out to ensure we have created it
-                        System.out.println(r);
-                        studentList.add(r);
+                        
+                        
                     }
                         intLine++;
                     }
@@ -57,11 +53,26 @@ public class EatingGame {
     int convenience = 10;
     int strength = 0;
     String message = "";
-    ArrayList<String> eatenThings = new ArrayList<>();
-    private void updateScores(String inName, int inConvenience, int inStrength, String inMessage){
-        convenience += inConvenience;
-        strength += inStrength;
-        eatenThings.add(inName);
+
+}
+
+class Food extends EatingGame {
+    public Food(String inName, int inConvenience, int inStrength, String inMessage) {
+        name = inName;
+        addConvenience = inConvenience;
+        addStrength = inStrength;
+        message = inMessage;
     }
 
+    String name = "";
+    int addConvenience = 0;
+    int addStrength = 0;
+    String message = "";
+    public String toString() {
+     return message;
+    }
+    public void updateScore() {
+        convenience += addConvenience;
+        strength += addStrength;
+    }
 }
