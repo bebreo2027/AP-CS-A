@@ -1,0 +1,12 @@
+Basketball,1,1,You are bouncy and falling doesn't hurt you!
+Laptop,2,-1,You can hack the bad guys with your mind but the Internet overloads your brain!
+Water bottle,-1,1,You can stay hydrated but the bad guys can make you throw up your water!
+Sheet of paper,3,-2,You can give bad guys paper cuts but you can't sit down without wrinkling!
+Brick,3,-1,You are tough but kind of heavy!
+Tree,2,2,You can give the bad guys splinters and get energy from the sun!
+Megaphone,3,1,You can use sonic booms on the bad guys and can project your voice!
+Toilet,2,-2,You can give the bad guys swirlies but your breath smells
+Window,-2,-3,You are made of glass and very fragile
+Bar of soap,3,3,You can clean the clock out of the bad guys and you can stop swearing!
+Sunglasses,1,2,You can intimidate the bad guys and can keep your eyes healthy!
+Gun,5,3,It's a gun. You can also fit in with Americans!
