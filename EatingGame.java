@@ -25,10 +25,10 @@ public class EatingGame {
     public static void main(String[] args) {
         System.out.println("This is the Eating Game! You are what you eat!");
         // Create a File object representing the file
-        File file = new File("Food/Food.txt");
+        File file = new File("Foods/Foods.txt");
         Scanner read;
         int intLine = 0;
-        
+        Scanner input = new Scanner(System.in);
         try (Scanner scanner = new Scanner(file)){
             while (scanner.hasNextLine()) {
                     
@@ -39,8 +39,19 @@ public class EatingGame {
                     read.useDelimiter(",");
                     if(intLine >= 0){
                         //read the words in the correct order into the correct variables
-                        
-                        
+                        Food currentFood = new Food(read.next(), read.nextInt(), read.nextInt(), read.next());
+                        System.out.println("\nThere is a " + currentFood.getName() + " in your path.\n"
+                                + "Eat it? (Input y to eat)");
+                        String eatOrNot = input.nextLine();
+                        if (eatOrNot.equalsIgnoreCase("Y")) {
+                            strength += currentFood.getAddStren();
+                            convenience += currentFood.getAddConv();
+                            eatenFoods.add(currentFood.getName());
+                            System.out.println(currentFood.getName() + " eaten!\n"
+                                    + currentFood);
+                        } else {
+                            System.out.println("Did not eat the " + currentFood.getName());
+                        }
                         
                     }
                         intLine++;
@@ -49,15 +60,56 @@ public class EatingGame {
             System.err.println("An error occurred while reading from the file: "
             + e.getMessage());
         }
-    }
-    int convenience = 10;
-    int strength = 0;
-    String message = "";
+        System.out.println("The foods you've eaten:\n" + eatenFoods + "\n"
+                + "Your strength score: " + strength
+                        + "\nYour convenience score: " + convenience);
+        
+        if (strength < 2) {
+            System.out.println("You're pretty weak!");
+        } else if (strength < 5) {
+            System.out.println("You're around as strong as Robin");
 
+        } else if (strength < 10) {
+            System.out.println("You're around as strong as Spider-Man");
+        } else if (strength < 15) {
+            System.out.println("You're around as strong as Naruto");
+        } else if (strength < 20) {
+            System.out.println("You're around as strong as Hulk");
+        } else {
+            System.out.println("You're around as strong as Superman!");
+        }
+        if (convenience < -3) {
+            System.out.println("and day to day life is almost impossible!");
+        } else if (convenience < 0) {
+            System.out.println("and day to day life is slightly harder");
+
+        } else if (convenience < 2) {
+            System.out.println("and day to day life is manageable");
+
+        } else if (convenience < 5){
+            System.out.println("and day to day life is pretty fun!");
+        } else {
+            System.out.println("and day to day life is a blast!");
+        }
+        if (eatenFoods.isEmpty()) {
+            System.out.println("You didn't eat anything!?");
+        }
+        if (strength > 7 && convenience > 5) {
+            System.out.println("You win!");
+
+        } else {
+            System.out.println("Better luck next time!");
+        }
+   }
+    static int convenience = 0;
+    static int strength = 0;
+    static ArrayList<String> eatenFoods = new ArrayList<String>();
+    
+    
 }
 
-class Food extends EatingGame {
-    public Food(String inName, int inConvenience, int inStrength, String inMessage) {
+class Food {
+    public Food(String inName, int inStrength, int inConvenience, String inMessage) {
         name = inName;
         addConvenience = inConvenience;
         addStrength = inStrength;
@@ -69,10 +121,17 @@ class Food extends EatingGame {
     int addStrength = 0;
     String message = "";
     public String toString() {
-     return message;
+        return message;
     }
-    public void updateScore() {
-        convenience += addConvenience;
-        strength += addStrength;
+
+    public String getName(){
+        return name;
     }
+    public int getAddConv(){
+        return addConvenience;
+    }
+    public int getAddStren(){
+        return addStrength;
+    }
+   
 }
