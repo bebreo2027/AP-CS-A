@@ -25,21 +25,28 @@ public class EatingGame {
     public static void main(String[] args) {
         System.out.println("This is the Eating Game! You are what you eat!");
         // Create a File object representing the file
-        File file = new File("Foods/Foods.txt");
-        Scanner read;
+        File nameFile = new File("Foods/Names.txt");
+        File scoreFile = new File("Foods/Scores.txt");
+        File messageFile = new File("Foods/Messages.txt");
+        Scanner readName;
+        Scanner readScore;
+        Scanner readMessage;
         int intLine = 0;
         Scanner input = new Scanner(System.in);
-        try (Scanner scanner = new Scanner(file)){
-            while (scanner.hasNextLine()) {
+        try (Scanner nameScanner = new Scanner(nameFile)){
+            try (Scanner scoreScanner = new Scanner(scoreFile)){
+                try (Scanner messageScanner = new Scanner(messageFile)){
+                    while (nameScanner.hasNextLine()) {
                     
-                    String line = scanner.nextLine();
-                    //create a Scanner to read the contents of the line
-                    read = new Scanner(line);
+                    //create scanners to read the contents of the line
+                    readName = new Scanner(nameScanner.nextLine());
+                    readScore = new Scanner(scoreScanner.nextLine());
+                    readMessage = new Scanner(messageScanner.nextLine());
                     //make sure it reads comma separated
-                    read.useDelimiter(",");
+                    readScore.useDelimiter(",");
                     if(intLine >= 0){
                         //read the words in the correct order into the correct variables
-                        Food currentFood = new Food(read.next(), read.nextInt(), read.nextInt(), read.next());
+                        Food currentFood = new Food(readName.nextLine(), readScore.nextInt(), readScore.nextInt(), readMessage.nextLine());
                         System.out.println("\nThere is a " + currentFood.getName() + " in your path.\n"
                                 + "Eat it? (Input y to eat)");
                         String eatOrNot = input.nextLine();
@@ -56,6 +63,15 @@ public class EatingGame {
                     }
                         intLine++;
                     }
+                } catch (Exception e) {
+                    System.err.println("An error occurred while reading from the file: "
+                    + e.getMessage());
+                }
+            } catch (Exception e) {
+                System.err.println("An error occurred while reading from the file: "
+                + e.getMessage());
+            }
+            
         } catch (Exception e) {
             System.err.println("An error occurred while reading from the file: "
             + e.getMessage());
