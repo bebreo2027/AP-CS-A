@@ -50,6 +50,7 @@ public class EatingGame {
                         //read the words in the correct order into the correct variables
                         Food currentFood;
                         SoundClass noise = new SoundClass();
+                        
                         currentFood = new Food(readName.nextLine(), readScore.nextInt(), readScore.nextInt(), readMessage.nextLine());
                         System.out.println("\nThere is a " + currentFood.getName() + " in your path.\n"
                                 + "Eat it? (Input y to eat or input anything else to reject)");
@@ -61,15 +62,15 @@ public class EatingGame {
                             System.out.println(currentFood.getName() + " eaten!\n"
                                     + currentFood);
                             if ((currentFood.getName().equals("Water bottle") || (currentFood.getName().equals("Window"))) || currentFood.getName().equals("Sunglasses")) {
-                                noise.createTimeForSound("Sounds/dragon-studio-glass-breaking-504033.mp3\"");
+                                noise.createTimeForSound("Sounds/41348__datasoundsample__glass-shatter.wav");
                             } else if (currentFood.getName().equals("Gun")) {
-                                noise.createTimeForSound("Sounds/freesound_community-pew-pew-two-102442.mp3");
+                                noise.createTimeForSound("Sounds/365637__obxjohn__pew-pew-two.wav");
                             } else {
-                                noise.createTimeForSound("Sounds/freesound_community-crack-and-crunch-14891.mp3");
+                                noise.createTimeForSound("Sounds/608646__theplax__crunch-2.wav");
                             }
                         } else {
                             System.out.println("Did not eat the " + currentFood.getName());
-                            noise.createTimeForSound("Sounds/the_cutie_pie-captain-nope-162963.mp3");
+                            noise.createTimeForSound("Sounds/269542__allietron__no.wav");
                         }
                         
                     }
@@ -178,13 +179,12 @@ class SoundClass{
             Clip clip = AudioSystem.getClip();
             clip.open(audioIn);
             clip.setFramePosition(0);
-            System.out.println("Playing the sound");
             clip.start();
             // Keep the program running until the sound finishes playing
             clip.addLineListener(event -> {
             if (event.getType() == LineEvent.Type.STOP) {
                 clip.close();
-                System.exit(0);
+                //System.exit(0);
             }
         });
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
